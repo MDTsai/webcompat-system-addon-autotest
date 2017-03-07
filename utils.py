@@ -33,7 +33,7 @@ def make_nightly_link(product, version, platform, locale):
     """
     filenames = {
         'win32': 'win32.zip',
-        'linux': 'linux-i686.tar.bz2',
+        'linux': 'linux-x86_64.tar.bz2',
         'darwin': 'mac.dmg'
     }
     filename = filenames[platform]
@@ -43,13 +43,14 @@ def make_nightly_link(product, version, platform, locale):
 
 def parse_version(source_file, version_pattern):
     """
-    Parse version info from ftp page
+    Parse version info from ftp page, get first version only
     """
     from urllib.request import urlopen
     response = urlopen(source_file).read()
     versions_match = version_pattern.finditer(response)
-    for version_match in versions_match:
-        version = version_match.group(1)
+    version_match = next(versions_match)
+    version = version_match.group(1)
+
     return version.decode("utf-8")
 
 

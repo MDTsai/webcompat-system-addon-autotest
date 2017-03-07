@@ -1,4 +1,5 @@
 # webcompat-system-addon-autotest
 
 Required packages:
-  requests
+  requests selenium
+  geckodriver in $PATH$
