@@ -16,6 +16,7 @@ if __name__ == "__main__":
 
     server = jenkins.Jenkins(JENKINS_URL, username=JENKINS_USERNAME, password=JENKINS_APITOKEN)
     build_info = server.get_build_info(job_name, build_number)
+    console_output = server.get_build_console_output(job_name, build_number)
 
     firebase = firebase.FirebaseApplication(FIREBASE_DSN)
 
@@ -28,3 +29,7 @@ if __name__ == "__main__":
     # Post new job result to firebase
     data = {'result': build_info['result'], 'timestamp': build_info['timestamp']}
     firebase.put('/job/' + firebase_job_name, build_number, data)
+
+    # Post new job console output to firebase
+    data = {'output': console_output}
+    firebase.put('/job_console/' + firebase_job_name, build_number, data)
