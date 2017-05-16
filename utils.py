@@ -56,3 +56,16 @@ def parse_version(source_file, version_pattern):
 
 def parse_nightly_version():
     return parse_version(firefox_ftp_url, nightly_version_pattern)
+
+
+def get_firefox_binary_path(platform):
+    """
+    Make firefox binary path in different platform
+    TODO: test and fix on Mac OS X
+    """
+    binaries = {
+        'win32': './firefox/firefox.exe',
+        'linux': './firefox/firefox',
+        'darwin': './firefox/firefox.exe'
+    }
+    return binaries[platform]

@@ -17,7 +17,7 @@ if __name__ == "__main__":
     unpack_archive(nightly_path)
 
     # Create a Firefox Binary from folder
-    binary = FirefoxBinary("./firefox/firefox")
+    binary = FirefoxBinary(utils.get_firefox_binary_path(platform))
     # Create Firefox WebDriver
     firefox = webdriver.Firefox(firefox_binary=binary)
 
